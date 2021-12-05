@@ -37,4 +37,54 @@ public class RequestRepo {
         request.setMethod("DELETE");
         return request;
     }
+
+    public static Request updateInfoTrelloBoard(String boardId) {
+        Request request=baseTrelloRequest();
+        request.setPath("1/boards/"+boardId+"?name=AT&desc=Test&prefs/background=red&key=" + KEY + "&token=" + TOKEN);
+        request.setMethod("PUT");
+        return request;
+    }
+
+    public static Request customTrelloBoard(String boardId, String nameList) {
+        Request request=baseTrelloRequest();
+        request.setPath("1/boards/" + boardId + "/lists?name=" + nameList + "&pos=bottom&key="+ KEY + "&token="+ TOKEN);
+        request.setMethod("POST");
+        return request;
+    }
+
+    public static Request listIdsTrelloBoard(String boardId) {
+        Request request=baseTrelloRequest();
+        request.setPath("1/boards/" + boardId + "/lists?key="+KEY + "&token="+TOKEN);
+        request.setMethod("GET");
+        return request;
+    }
+
+    public static Request createCardTrello(String idList, String nameCart) {
+        Request request=baseTrelloRequest();
+        request.setPath("1/cards?idList=" + idList + "&name=" + nameCart + "&key="+ KEY + "&token="+ TOKEN);
+        request.setMethod("POST");
+        return request;
+    }
+
+    public static Request getMembers(String boardId) {
+        Request request=baseTrelloRequest();
+        request.setPath("1/boards/" + boardId + "/memberships?key="+KEY + "&token="+TOKEN);
+        request.setMethod("GET");
+        return request;
+    }
+
+    public static Request createChecklistTrello(String cardId, String name) {
+        Request request=baseTrelloRequest();
+        request.setPath("1/checklists?idCard=" + cardId + "&name=" + name + "&key="+KEY + "&token="+TOKEN);
+        request.setMethod("POST");
+        return request;
+    }
+
+    public static Request getCardIdsByListTrello(String idList) {
+        Request request=baseTrelloRequest();
+        request.setPath("1/lists/" + idList + "/cards?key="+ KEY + "&token="+ TOKEN);
+        request.setMethod("GET");
+        return request;
+    }
+
 }
