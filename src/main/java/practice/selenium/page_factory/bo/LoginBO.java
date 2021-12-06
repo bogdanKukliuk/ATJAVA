@@ -14,14 +14,25 @@ public class LoginBO {
                 &&
                 loginPO.Login(student.getMyEmail(),student.getMyPassword());
     }
-    public void TestUser(Integer studentId, String user){
+    public boolean TestUser(Integer studentId, String user){
         LoginPO loginPO = new LoginPO();
         Student student = getStudent(studentId);
-        loginPO.AddUser(student.getMyEmail(),student.getMyPassword(), user);
+        return loginPO.AddUser(student.getMyEmail(),student.getMyPassword(), user);
     }
-    public void TestGroup(Integer studentId, String group){
+    public boolean TestGroup(Integer studentId, String group){
         LoginPO loginPO = new LoginPO();
         Student student = getStudent(studentId);
-        loginPO.AddGroup(student.getMyEmail(),student.getMyPassword(), group);
+        return loginPO.AddGroup(student.getMyEmail(),student.getMyPassword(), group);
     }
+    public boolean TestSend(Integer studentId, String massager, String text){
+        LoginPO loginPO = new LoginPO();
+        Student student = getStudent(studentId);
+        return loginPO.sendTest(student.getMyEmail(),student.getMyPassword(), massager, text);
+    }
+    public boolean TestPost(Integer studentId, String user, String text){
+        LoginPO loginPO = new LoginPO();
+        Student student = getStudent(studentId);
+        return loginPO.postTest(student.getMyEmail(),student.getMyPassword(), user, text);
+    }
+
 }

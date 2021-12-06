@@ -5,14 +5,14 @@ import practice.api.Request;
 
 public class RequestRepo {
 
-    public static Request getPostman() {
-        Request request=new Request();
-        request.setProtocol("https");
-        request.setHost("postman-echo.com");
-        request.setPath("get");
-        request.setMethod("GET");
-        return request;
-    }
+//    public static Request getPostman() {
+//        Request request=new Request();
+//        request.setProtocol("https");
+//        request.setHost("postman-echo.com");
+//        request.setPath("get");
+//        request.setMethod("GET");
+//        return request;
+//    }
 
     private static Request baseTrelloRequest() {
         Request request=new Request();
@@ -23,6 +23,7 @@ public class RequestRepo {
 
     private final static String KEY=Credentials.MyKey;
     private final static String TOKEN=Credentials.MyToken;
+//    private final static String MEMBERID=Credentials.MemberID;
 
     public static Request createTrelloBoard(String boardName) {
         Request request=baseTrelloRequest();
@@ -40,7 +41,7 @@ public class RequestRepo {
 
     public static Request updateInfoTrelloBoard(String boardId) {
         Request request=baseTrelloRequest();
-        request.setPath("1/boards/"+boardId+"?name=AT&desc=Test&prefs/background=red&key=" + KEY + "&token=" + TOKEN);
+        request.setPath("1/boards/"+boardId+"?name=BogdanTest&desc=TestDesc&prefs/background=blue&key=" + KEY + "&token=" + TOKEN);
         request.setMethod("PUT");
         return request;
     }
@@ -84,6 +85,19 @@ public class RequestRepo {
         Request request=baseTrelloRequest();
         request.setPath("1/lists/" + idList + "/cards?key="+ KEY + "&token="+ TOKEN);
         request.setMethod("GET");
+        return request;
+    }
+
+    public static Request setMembers(String boardId) {
+        Request request=baseTrelloRequest();
+        request.setPath("1/boards/" + boardId + "/members/user01392724");
+        request.setMethod("PUT");
+        return request;
+    }
+    public static Request murkedView(String boardId) {
+        Request request=baseTrelloRequest();
+        request.setPath("1/boards/" + boardId + "/markedAsViewed");
+        request.setMethod("POST");
         return request;
     }
 

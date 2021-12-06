@@ -14,48 +14,39 @@ public class FacebookTest {
     @DataProvider(parallel = true)
     public static Object[][] browserDataProvider() {
         return new Object[][]{
-//                {"chrome"},
-//                {"chrome"},
-                {"edge"}
+//                {"edge"},
+                {"chrome"}
         };
     }
 
     public void loginTest() {
-        BrowserFactory.initDriver("edge");
+        BrowserFactory.initDriver("chrome");
         LoginBO loginBO = new LoginBO();
-        loginBO.TestLogin(1);
+        Assert.assertTrue(loginBO.TestLogin(1),"Failed!");
 
     }
     public void userTest() {
-        BrowserFactory.initDriver("edge");
+        BrowserFactory.initDriver("chrome");
         LoginBO loginBO = new LoginBO();
-        loginBO.TestUser(1, "elena.smyk.3");
+        Assert.assertTrue(loginBO.TestUser(1, "bakun.mykola"),"Failed!");
 
     }
     public void groupTest() {
-        BrowserFactory.initDriver("edge");
+        BrowserFactory.initDriver("chrome");
         LoginBO loginBO = new LoginBO();
-        loginBO.TestGroup(1, "393403465087588");
+        Assert.assertTrue(loginBO.TestGroup(1, "393403465087588"),"Failed!");
 
     }
-//    @Severity(SeverityLevel.CRITICAL)
-//    public void followToGroupTest() {
-//        BrowserFactory.initDriver("edge");
-//        LoginBO loginBO = new LoginBO();
-//        Assert.assertTrue(loginBO.followToGroup(5),"Follow Failed!");
-//
-//    }
-//    @Severity(SeverityLevel.CRITICAL)
-//    public void sendMassageTest() {
-//        BrowserFactory.initDriver("edge");
-//        LoginBO loginBO = new LoginBO();
-//        Assert.assertTrue(loginBO.sendMassage(5,"Hi bro, I am Bot."),"Send Massage Failed!");
-//
-//    }
-//    @Severity(SeverityLevel.CRITICAL)
-//    public void likeAndCommentPostTest() {
-//        BrowserFactory.initDriver("chrome");
-//        LoginBO loginBO = new LoginBO();
-//        Assert.assertTrue(loginBO.likeAndCommentPost(5,"CO_Grl8tthLNs3eHU8Py8pO1wraJYfs5_cBUos0","Cool!"),"Like Or Comment Post Failed!");
-//    }
+    public void sendTest() {
+        BrowserFactory.initDriver("chrome");
+        LoginBO loginBO = new LoginBO();
+        Assert.assertTrue(loginBO.TestSend(1, "100020006073172","ABOBA"),"Failed!");
+
+    }
+    @Severity(SeverityLevel.CRITICAL)
+    public void likesTest() {
+        BrowserFactory.initDriver("chrome");
+        LoginBO loginBO = new LoginBO();
+        Assert.assertTrue(loginBO.TestPost(1,"bakun.mykola", "Cool!"),"Failed!");
+    }
 }

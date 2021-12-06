@@ -1,5 +1,6 @@
 package practice.selenium.page_factory.po;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import practice.selenium.page_factory.bo.LoginBO;
@@ -25,7 +26,7 @@ public class LoginPO extends HomePO{
         element = driver.findElement(By.name("login"));
         element.click();
 
-        element = driver.findElement(By.xpath("//input[@type=\'search\']"));
+        element = waitForMeVisible( 8000,"//input[@type=\'search\']");
         return element.isDisplayed();
     }
     @Override
@@ -83,7 +84,52 @@ public class LoginPO extends HomePO{
         return element.isDisplayed();
     }
 
+    public boolean sendTest(String login,String pass, String massager, String text){
+        driver.get("https://www.facebook.com");
 
+        element = driver.findElement(By.name("email"));
+        element.clear();
+        element.sendKeys(login);
+
+        element = driver.findElement(By.name("pass"));
+        element.clear();
+        element.sendKeys(pass);
+
+        element = driver.findElement(By.name("login"));
+        element.click();
+
+        element = waitForMeVisible( 8000,"//a[@role='link' and @href='/messages/t/" + massager + "/']");
+        element.click();
+
+        element = waitForMeVisible( 8000,"//div[@role='textbox' and @aria-label='Message']");
+        element.sendKeys(text);
+        element.sendKeys(Keys.ENTER);
+        element = waitForMeVisible( 8000,"//div[normalize-space()=\'" + text + "\']");
+        return element.isDisplayed();
+    }
+
+    public boolean postTest(String login,String pass, String user, String text){
+        driver.get("https://www.facebook.com");
+        element = driver.findElement(By.name("email"));
+        element.clear();
+        element.sendKeys(login);
+        element = driver.findElement(By.name("pass"));
+        element.clear();
+        element.sendKeys(pass);
+        element = driver.findElement(By.name("login"));
+        element.click();
+
+        System.out.println(driver.getCurrentUrl());
+        driver.navigate().to("https://www.facebook.com/" + user );
+
+        System.out.println(driver.getCurrentUrl());
+
+        element = waitForMeVisible( 8000,"//*[@aria-label=\"Write a comment\"]");
+        element.sendKeys(text);
+        element.sendKeys(Keys.ENTER);
+        element = waitForMeVisible( 8000,"//div[normalize-space()=\'" + text + "\']");
+        return element.isDisplayed();
+    }
 
 
 

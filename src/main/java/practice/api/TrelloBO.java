@@ -50,12 +50,25 @@ public class TrelloBO {
         Assert.assertEquals(res.getStatusCode().intValue(),200,"invalid code");
         return res;
     }
+    public Response murkView(String boardId) {
+        Request req = RequestRepo.murkedView(boardId);
+        Response res = new Client().send(req);
+        Assert.assertEquals(res.getStatusCode().intValue(),200,"invalid code");
+        return res;
+    }
     public Response getMembers(String boardId) {
         Request req = RequestRepo.getMembers(boardId);
         Response res = new Client().send(req);
         System.out.println("#############");
         System.out.println(res.getBody());
         System.out.println("#############");
+        Assert.assertEquals(res.getStatusCode().intValue(),200,"invalid code");
+        return res;
+    }
+
+    public Response putMembers(String boardID){
+        Request req = RequestRepo.setMembers(boardID);
+        Response res = new Client().send(req);
         Assert.assertEquals(res.getStatusCode().intValue(),200,"invalid code");
         return res;
     }

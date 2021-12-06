@@ -16,7 +16,7 @@ public class TrelloTest {
     }
     @Test
     public void deleteBoardByIdTest(){
-        Response res=trelloBO.deleteBoard("hCba3vq7");
+        Response res=trelloBO.deleteBoard(trelloBO.createBoard());
         Assert.assertEquals(res.getStatusCode().intValue(),
                 200,
                 "invalid code");
@@ -30,7 +30,7 @@ public class TrelloTest {
     @Test
     public void createListTest(){
         String boardId=trelloBO.createBoard();
-        Assert.assertEquals(trelloBO.customBoard(boardId, "To Do").getStatusCode().intValue(),
+        Assert.assertEquals(trelloBO.customBoard(boardId, "To_Do").getStatusCode().intValue(),
                 200,
                 "invalid code");
         Assert.assertEquals(trelloBO.customBoard(boardId, "Doing").getStatusCode().intValue(),
@@ -50,8 +50,25 @@ public class TrelloTest {
                 "invalid code");
     }
     @Test
-    public void getMemdersTest(){
+    public void MurkedViewTest(){
         String boardId = trelloBO.createBoard();
+        trelloBO.murkView(boardId);
+        Assert.assertEquals(trelloBO.murkView(boardId).getStatusCode().intValue(),
+                200,
+                "invalid code");
+    }
+    @Test
+    public void setMemdersTest(){
+        String boardId = "szkVkWNQ";
+        trelloBO.putMembers(boardId);
+        Assert.assertEquals(trelloBO.putMembers(boardId).getStatusCode().intValue(),
+                200,
+                "invalid code");
+    }
+    @Test
+    public void getMemdersTest() {
+        String boardId = "szkVkWNQ";
+//        String boardId = trelloBO.createBoard();
         Assert.assertEquals(trelloBO.getMembers(boardId).getStatusCode().intValue(),
                 200,
                 "invalid code");
