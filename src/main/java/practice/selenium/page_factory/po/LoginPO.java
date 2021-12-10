@@ -3,51 +3,37 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import practice.selenium.page_factory.bo.LoginBO;
+import org.openqa.selenium.support.PageFactory;
 import practice.selenium.parallel_run.BrowserFactory;
 
 import java.util.Date;
 
 
-public class LoginPO extends HomePO{
+public class LoginPO{
+
 
     private WebDriver driver = BrowserFactory.getDriver();
     private WebElement element;
+    private LoginFactory loginFactory = PageFactory.initElements(driver, LoginFactory.class);
 
     public boolean Login(String login,String pass){
-        element = driver.findElement(By.name("email"));
-        element.clear();
-        element.sendKeys(login);
 
-        element = driver.findElement(By.name("pass"));
-        element.clear();
-        element.sendKeys(pass);
-
-        element = driver.findElement(By.name("login"));
-        element.click();
+        loginFactory.FullLogin(login,pass);
 
         element = waitForMeVisible( 8000,"//input[@type=\'search\']");
         return element.isDisplayed();
     }
-    @Override
+//    @Override
     public boolean isLogin() {
-        driver.get("https://www.facebook.com");
+        loginFactory.open();
+
         return driver.findElement(By.name("email")).isDisplayed();
     }
 
     public boolean AddUser(String login,String pass, String user){
-        driver.get("https://www.facebook.com");
 
-        element = driver.findElement(By.name("email"));
-        element.clear();
-        element.sendKeys(login);
-
-        element = driver.findElement(By.name("pass"));
-        element.clear();
-        element.sendKeys(pass);
-
-        element = driver.findElement(By.name("login"));
-        element.click();
+        loginFactory.open();
+        loginFactory.FullLogin(login,pass);
 
         System.out.println(driver.getCurrentUrl());
         driver.navigate().to("https://www.facebook.com/" + user );
@@ -61,18 +47,9 @@ public class LoginPO extends HomePO{
     }
 
     public boolean AddGroup(String login,String pass, String group){
-        driver.get("https://www.facebook.com");
+        loginFactory.open();
+        loginFactory.FullLogin(login,pass);
 
-        element = driver.findElement(By.name("email"));
-        element.clear();
-        element.sendKeys(login);
-
-        element = driver.findElement(By.name("pass"));
-        element.clear();
-        element.sendKeys(pass);
-
-        element = driver.findElement(By.name("login"));
-        element.click();
 
         System.out.println(driver.getCurrentUrl());
         driver.navigate().to("https://www.facebook.com/groups/" + group );
@@ -85,18 +62,8 @@ public class LoginPO extends HomePO{
     }
 
     public boolean sendTest(String login,String pass, String massager, String text){
-        driver.get("https://www.facebook.com");
-
-        element = driver.findElement(By.name("email"));
-        element.clear();
-        element.sendKeys(login);
-
-        element = driver.findElement(By.name("pass"));
-        element.clear();
-        element.sendKeys(pass);
-
-        element = driver.findElement(By.name("login"));
-        element.click();
+        loginFactory.open();
+        loginFactory.FullLogin(login,pass);
 
         element = waitForMeVisible( 8000,"//a[@role='link' and @href='/messages/t/" + massager + "/']");
         element.click();
@@ -109,15 +76,8 @@ public class LoginPO extends HomePO{
     }
 
     public boolean postTest(String login,String pass, String user, String text){
-        driver.get("https://www.facebook.com");
-        element = driver.findElement(By.name("email"));
-        element.clear();
-        element.sendKeys(login);
-        element = driver.findElement(By.name("pass"));
-        element.clear();
-        element.sendKeys(pass);
-        element = driver.findElement(By.name("login"));
-        element.click();
+        loginFactory.open();
+        loginFactory.FullLogin(login,pass);
 
         System.out.println(driver.getCurrentUrl());
         driver.navigate().to("https://www.facebook.com/" + user );
@@ -130,9 +90,6 @@ public class LoginPO extends HomePO{
         element = waitForMeVisible( 8000,"//div[normalize-space()=\'" + text + "\']");
         return element.isDisplayed();
     }
-
-
-
 
 
     public WebElement waitForMeVisible(int timeout_ms, String xpath){
@@ -152,6 +109,5 @@ public class LoginPO extends HomePO{
         }
         return null;
     }
-
 
 }

@@ -1,11 +1,13 @@
 package practice.selenium.page_factory.bo;
 
+import org.openqa.selenium.WebDriver;
 import practice.hibernate.model.Student;
 import practice.selenium.page_factory.po.LoginPO;
 
 import static practice.hibernate.HibernateTest.getStudent;
 
 public class LoginBO {
+    WebDriver driver;
 
     public boolean TestLogin(Integer studentId){
         LoginPO loginPO = new LoginPO();
