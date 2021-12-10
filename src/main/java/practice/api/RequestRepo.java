@@ -23,7 +23,6 @@ public class RequestRepo {
 
     private final static String KEY=Credentials.MyKey;
     private final static String TOKEN=Credentials.MyToken;
-//    private final static String MEMBERID=Credentials.MemberID;
 
     public static Request createTrelloBoard(String boardName) {
         Request request=baseTrelloRequest();

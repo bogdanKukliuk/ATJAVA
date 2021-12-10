@@ -16,7 +16,7 @@ public class TrelloTest {
     }
     @Test
     public void deleteBoardByIdTest(){
-        Response res=trelloBO.deleteBoard(trelloBO.createBoard());
+        Response res=trelloBO.deleteBoard("dX0BMdCL");//trelloBO.createBoard());
         Assert.assertEquals(res.getStatusCode().intValue(),
                 200,
                 "invalid code");
@@ -59,7 +59,7 @@ public class TrelloTest {
     }
     @Test
     public void setMemdersTest(){
-        String boardId = "szkVkWNQ";
+        String boardId = "w7bEDt9A";
         trelloBO.putMembers(boardId);
         Assert.assertEquals(trelloBO.putMembers(boardId).getStatusCode().intValue(),
                 200,
@@ -67,7 +67,7 @@ public class TrelloTest {
     }
     @Test
     public void getMemdersTest() {
-        String boardId = "szkVkWNQ";
+        String boardId = "w7bEDt9A";
 //        String boardId = trelloBO.createBoard();
         Assert.assertEquals(trelloBO.getMembers(boardId).getStatusCode().intValue(),
                 200,

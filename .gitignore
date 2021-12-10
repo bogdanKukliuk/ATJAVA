@@ -2,5 +2,4 @@
 .idea
 /target/
 Credentials.*
-allure-results
-perfomance
+#allure-results
